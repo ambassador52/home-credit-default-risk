@@ -1,0 +1,38 @@
+HOME CREDIT FINAL RUN ÖZETİ
+==============================
+
+Model karşılaştırması en yüksek validation ROC-AUC:
+- Model: LightGBM
+- ROC-AUC: 0.757545
+- Average Precision: 0.246972
+
+Seçilen optimize model:
+- Tuned LightGBM
+- Eşik: 0.10
+- Validation F1: 0.282322
+- Validation precision: 0.186126
+- Validation recall: 0.584318
+
+Dört oran kontrollü validation karşılaştırması:
+- Oransız ROC-AUC: 0.757352
+- Oranlı ROC-AUC: 0.758891
+- Fark: +0.001539
+
+Final test:
+- ROC-AUC: 0.762784
+- Average Precision: 0.249359
+- Precision: 0.193096
+- Recall: 0.606874
+- F1: 0.292974
+- TP: 2260
+- FP: 9444
+- TN: 32959
+- FN: 1464
+- Riskli işaretlenen: 11704
+
+Yorum sınırları:
+- ROC-AUC doğruluk yüzdesi değildir.
+- Eşik finansal maliyet verisi olmadan ekonomik optimum değildir.
+- Gain importance nedensellik veya risk yönü değildir.
+- Çalışma/yaş oranı toplam çalışma hayatını değil mevcut işte geçen süre / yaşı temsil eder.
+- Önceki EDA tüm veri üzerinde yapıldığı için testin proje boyunca hiç görülmediği iddia edilmez.
