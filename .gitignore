@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Raw / large data
+application_train.csv
+data/raw/*
+!data/raw/.gitkeep
+
+# Trained model binaries
+*.joblib
+*.pkl
+final_models/
+models/*
+!models/.gitkeep
+
+# Generated local outputs
+final_outputs/
+
+# OS
+.DS_Store
+Thumbs.db
