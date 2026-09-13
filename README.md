@@ -99,7 +99,6 @@ En iyi CV ROC-AUC:
 | Random Forest | 0.739175 | 0.231351 |
 | Dummy | 0.500000 | 0.080734 |
 
-### Eşik seçimi
 
 ### Eşik seçimi
 
@@ -113,7 +112,7 @@ Optimize edilmiş LightGBM modelinin validation olasılıkları ilk aşamada `0.
 
 Bu ilk üç referans eşik arasında en yüksek F1 değeri `0.10` eşiğinde elde edilmiştir.
 
-Daha sonra validation verisinde `0.01–0.50` aralığı `0.01` adımlarla taranmıştır. Genişletilmiş eşik analizinde F1 skorunu maksimum yapan eşik `0.15` olarak bulunmuştur.
+Ek bir duyarlılık analizi olarak validation verisinde `0.01–0.50` aralığı `0.01` adımlarla taranmıştır. Genişletilmiş eşik analizinde F1 skorunu maksimum yapan eşik `0.15` olarak bulunmuştur.
 
 | Eşik | Precision | Recall | F1 | TP | FP | FN | İşaretlenen |
 |---:|---:|---:|---:|---:|---:|---:|---:|
@@ -228,7 +227,8 @@ Kod uzun 30x5 tuning sonucunu kaydeder. Aynı çıktı dosyaları mevcutsa tamam
 - `TARGET` ve `SK_ID_CURR` model girdisinde yok
 - Learned preprocessing pipeline içinde
 - Hyperparameter tuning yalnızca train üzerinde
-- Eşik validation üzerinde seçiliyor
+- Operasyonel eşik validation sonuçları ve risk-yakalama önceliği üzerinden belirleniyor
+- Genişletilmiş eşik taraması ek duyarlılık analizi olarak raporlanıyor
 - Test seçim amacıyla kullanılmıyor
 - `subsample` tuning sırasında `subsample_freq=1` ile etkin
 - Search paralelliği ile LightGBM iç paralelliği ayrılarak nested parallelism sınırlandırılıyor
