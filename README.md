@@ -94,14 +94,16 @@ En iyi CV ROC-AUC:
 | Model | ROC-AUC | AP |
 |---|---:|---:|
 | LightGBM | **0.757545** | 0.246972 |
-| XGBoost | 0.757086 | **0.248459** |
-| Logistic Regression | 0.748655 | 0.231783 |
-| Random Forest | 0.739175 | 0.231369 |
+| XGBoost | 0.757086 | **0.248481** |
+| Logistic Regression | 0.748655 | 0.231819 |
+| Random Forest | 0.739175 | 0.231351 |
 | Dummy | 0.500000 | 0.080734 |
 
 ### Eşik seçimi
 
-Optimize LightGBM olasılıkları validation üzerinde `0.05`, `0.10`, `0.50` eşiklerinde karşılaştırılmıştır.
+### Eşik seçimi
+
+Optimize edilmiş LightGBM modelinin validation olasılıkları ilk aşamada `0.05`, `0.10` ve `0.50` referans eşiklerinde karşılaştırılmıştır.
 
 | Eşik | Precision | Recall | F1 |
 |---:|---:|---:|---:|
@@ -109,9 +111,20 @@ Optimize LightGBM olasılıkları validation üzerinde `0.05`, `0.10`, `0.50` e�
 | **0.10** | **0.186126** | **0.584318** | **0.282322** |
 | 0.50 | 0.600000 | 0.020945 | 0.040477 |
 
-Bu üç aday içinden F1 en yüksek olduğu için `0.10` seçilmiştir.
+Bu ilk üç referans eşik arasında en yüksek F1 değeri `0.10` eşiğinde elde edilmiştir.
 
-Bu seçim finansal maliyet bilgisi içermediğinden “ekonomik olarak optimum eşik” anlamına gelmez.
+Daha sonra validation verisinde `0.01–0.50` aralığı `0.01` adımlarla taranmıştır. Genişletilmiş eşik analizinde F1 skorunu maksimum yapan eşik `0.15` olarak bulunmuştur.
+
+| Eşik | Precision | Recall | F1 | TP | FP | FN | İşaretlenen |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0.10 | 0.186126 | 0.584318 | 0.282322 | 2176 | 9515 | 1548 | 11691 |
+| **0.15** | **0.245820** | 0.422395 | **0.310777** | 1573 | **4826** | 2151 | 6399 |
+
+`0.15` eşiği F1 açısından daha yüksek sonuç vermektedir. Ancak `0.10` eşiği 2176 gerçek `TARGET=1` başvuruyu yakalarken, `0.15` eşiği 1573 başvuruyu yakalamaktadır. Başka bir ifadeyle `0.15`, `0.10` ile karşılaştırıldığında 4689 yanlış alarmı azaltırken 603 ek gerçek `TARGET=1` başvurunun kaçırılmasına yol açmaktadır.
+
+Bu projede riskli olarak işaretlenen bir başvuru otomatik kredi reddi olarak yorumlanmamaktadır. Model çıktısı, daha ayrıntılı incelenecek başvuruların önceliklendirilmesi amacıyla ele alınmıştır. Bu kullanım varsayımı altında daha yüksek recall ile daha fazla gerçek riskli başvuruyu yakalayan `0.10`, operasyonel karar eşiği olarak korunmuştur. `0.15` ise validation verisinde F1 açısından en iyi istatistiksel alternatif olarak raporlanmıştır.
+
+Bu seçim finansal maliyet bilgisi içermediğinden `0.10` veya `0.15` için “ekonomik olarak optimum eşik” iddiasında bulunulmamaktadır.
 
 ## Ratio ablation
 
