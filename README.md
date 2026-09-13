@@ -182,6 +182,7 @@ home_credit_submission/
 │   ├── tables/
 │   │   ├── model_comparison_validation.csv
 │   │   ├── threshold_comparison_validation.csv
+│   │   ├── threshold_final_sonuclari.csv
 │   │   ├── feature_ratio_ablation_validation.csv
 │   │   └── lightgbm_gain_importance_top20.csv
 │   └── figures/
